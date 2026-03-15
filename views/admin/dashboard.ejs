@@ -1,0 +1,183 @@
+<% layout("/layout/boilerplate.ejs") %>
+<div class="admin-page">
+<div class="container mt-5 admin-dashboard">
+
+<!-- Header -->
+<div class="dashboard-header mb-5">
+
+<div>
+<h2 class="dashboard-title">Admin Dashboard</h2>
+<p class="dashboard-subtitle">Overview of your platform activity</p>
+</div>
+
+<div class="dashboard-actions">
+
+<a href="/admin/cars/new" class="btn btn-primary dashboard-btn">
+➕ Add New Car
+</a>
+
+<a href="/home" class="btn btn-outline-dark dashboard-btn">
+View Website
+</a>
+
+</div>
+
+</div>
+
+
+
+<!-- STATISTICS -->
+<div class="row g-4">
+
+<!-- Cars -->
+<div class="col-md-4 ">
+
+<div class="stats-card stats-cars bg-dark">
+
+<div class="stats-icon">🚗</div>
+
+<div class="stats-info">
+
+<h6>Total Cars</h6>
+<h2><%= totalCars %></h2>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- Bookings -->
+<div class="col-md-4">
+
+<div class="stats-card stats-bookings bg-dark">
+
+<div class="stats-icon">📅</div>
+
+<div class="stats-info">
+
+<h6>Total Bookings</h6>
+<h2><%= totalBookings %></h2>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- Users -->
+<div class="col-md-4">
+
+<div class="stats-card stats-users bg-dark">
+
+<div class="stats-icon">👤</div>
+
+<div class="stats-info">
+
+<h6>Total Users</h6>
+<h2><%= totalUsers %></h2>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- CHART -->
+<div class="dashboard-chart mt-5 bg-dark">
+
+<h5 class="chart-title">Platform Statistics</h5>
+
+<canvas id="dashboardChart"></canvas>
+
+</div>
+
+
+
+<!-- QUICK ACTIONS -->
+<div class="row mt-5 g-4">
+
+<div class="col-md-6">
+
+<div class="action-card bg-dark">
+
+<h5>Manage Cars</h5>
+
+<p>Add, edit or remove vehicles from the platform.</p>
+
+<a href="/admin/cars/new" class="btn btn-primary">
+Manage Cars
+</a>
+
+</div>
+
+</div>
+
+
+<div class="col-md-6">
+
+<div class="action-card bg-dark">
+
+<h5>Platform Analytics</h5>
+
+<p>Monitor platform growth and performance.</p>
+
+<a href="#" class="btn btn-outline-light">
+View Reports
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+
+<script>
+
+const ctx = document.getElementById("dashboardChart");
+
+new Chart(ctx,{
+type:"bar",
+data:{
+labels:["Cars","Bookings","Users"],
+datasets:[{
+label:"Platform Stats",
+data:[<%= totalCars %>, <%= totalBookings %>, <%= totalUsers %>],
+backgroundColor:[
+"#3b82f6",
+"#22c55e",
+"#f59e0b"
+],
+borderRadius:10,
+barThickness:60
+}]
+},
+options:{
+responsive:true,
+maintainAspectRatio:false,
+plugins:{
+legend:{display:false}
+},
+scales:{
+y:{
+beginAtZero:true,
+grid:{color:"#e5e7eb"}
+},
+x:{
+grid:{display:false}
+}
+}
+}
+});
+
+</script>

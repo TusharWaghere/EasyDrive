@@ -1,0 +1,160 @@
+<% layout("/layout/boilerplate.ejs") %>
+<section class="hero-section">
+
+<div class="hero-content">
+
+<h1>Find Your Perfect Ride</h1>
+
+<p>Rent cars and bikes instantly in your city</p>
+
+<form action="/home" method="GET" class="hero-search">
+
+<input 
+type="text" 
+name="location" 
+placeholder="Search city (Mumbai, Delhi, Bangalore)"
+required>
+
+<button type="submit">
+Search
+</button>
+
+</form>
+
+</div>
+
+</section>
+<div class="container mt-4">
+
+    <% if(allCar.length === 0){ %>
+
+<div class="alert alert-warning text-center mt-4">
+🚫 No cars found for this location.
+</div>
+
+<% } %>
+
+
+<!-- ADMIN CONTROLS -->
+<% if(currentUser && currentUser.role === "admin"){ %>
+
+<div class="admin-tools d-flex justify-content-end gap-2 mb-4">
+
+<a href="/admin/dashboard" class="btn btn-warning">
+📊 Admin Dashboard
+</a>
+
+<a href="/admin/cars/new" class="btn btn-primary">
+➕ Add New Car
+</a>
+
+</div>
+
+<% } %>
+
+
+<!-- CAR LIST -->
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-4">
+
+<% allCar.forEach(car => { %>
+
+<div class="col">
+
+<div class="card h-100 shadow-sm border-0 car-card">
+
+<!-- IMAGE -->
+<div class="card-img-container position-relative">
+
+<img
+src="<%= car.image?.url || '/images/default-car.jpg' %>"
+class="card-img-top car-img"
+alt="<%= car.title %>"
+>
+
+<span class="price-badge">
+₹ <%= car.pricePerDay %> / Day
+</span>
+
+</div>
+
+
+<!-- BODY -->
+<div class="card-body">
+
+<h5 class="card-title fw-bold">
+<%= car.title %>
+</h5>
+
+<p class="text-muted mb-2">
+<i class="fa-solid fa-location-dot"></i> <%= car.location %>
+</p>
+
+<div class="car-specs small text-muted">
+
+<p class="mb-1"><i class="fa-solid fa-car"></i> <%= car.vehicleType %></p>
+
+<p class="mb-1"><i class="fa-solid fa-couch"></i> Seats: <%= car.seats %></p>
+
+<p><i class="fa-solid fa-gas-pump"></i> Fuel: <%= car.fuelType %></p>
+
+</div>
+
+
+<!-- AVAILABILITY -->
+<% if(car.available){ %>
+
+<span class="badge bg-success">
+Available
+</span>
+
+<% } else { %>
+
+<span class="badge bg-danger">
+Not Available
+</span>
+
+<% } %>
+
+</div>
+
+
+<!-- FOOTER -->
+<div class="card-footer bg-white border-0 text-center pb-3">
+
+<a href="/cars/<%= car._id %>" class="btn btn-primary book-btn">
+Book Now
+</a>
+
+<!-- ADMIN OWNER CONTROLS -->
+<% if(currentUser && car.owner && car.owner.equals(currentUser._id)){ %>
+
+<div class="d-flex justify-content-center gap-2 mt-2">
+
+<a href="/admin/cars/<%= car._id %>/edit"
+class="btn btn-sm btn-warning">
+Edit
+</a>
+
+<form action="/admin/cars/<%= car._id %>?_method=DELETE" method="POST">
+
+<button class="btn btn-sm btn-danger">
+Delete
+</button>
+
+</form>
+
+</div>
+
+<% } %>
+
+</div> 
+
+</div> 
+
+</div> 
+
+<% }) %>
+
+</div> 
+
+</div> 

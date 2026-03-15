@@ -1,0 +1,68 @@
+<% layout("/layout/boilerplate.ejs") %>
+
+<div class="container mt-5">
+
+<h2 class="fw-bold mb-4">My Bookings</h2>
+
+<% if(bookings.length === 0){ %>
+
+<div class="alert alert-info">
+You have no bookings yet.
+</div>
+
+<% } %>
+
+<div class="row g-4">
+
+<% bookings.forEach(booking => { %>
+
+<div class="col-md-6">
+
+<div class="card booking-card shadow-sm">
+
+<img
+src="<%= booking.car.image?.url || '/images/default-car.jpg' %>"
+class="card-img-top booking-img"
+alt="Car Image"
+>
+
+<div class="card-body">
+
+<h5 class="fw-bold">
+<%= booking.car.title %>
+</h5>
+
+<p class="text-muted mb-2">
+📍 <%= booking.car.location %>
+</p>
+
+<p class="mb-1">
+<strong>Start Date:</strong>
+<%= booking.startDate.toDateString() %>
+</p>
+
+<p class="mb-1">
+<strong>End Date:</strong>
+<%= booking.endDate.toDateString() %>
+</p>
+
+<p class="mb-2">
+<strong>Pickup:</strong>
+<%= booking.pickupLocation %>
+</p>
+
+<span class="badge bg-success">
+Booked
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+<% }) %>
+
+</div>
+
+</div>

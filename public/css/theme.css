@@ -1,0 +1,50 @@
+/* ================= LIGHT THEME ================= */
+
+:root{
+
+--bg-color:#f5f7fb;
+--card-bg:#ffffff;
+--text-color:#0f172a;
+--navbar-bg:#ffffff;
+--border:#e2e8f0;
+
+}
+
+
+/* ================= DARK THEME ================= */
+
+body.dark-mode{
+
+--bg-color:#0f172a;
+--card-bg:#1e293b;
+--text-color:#e2e8f0;
+--navbar-bg:#111827;
+--border:#334155;
+
+}
+
+
+/* ================= GLOBAL ================= */
+
+body{
+background:var(--bg-color);
+color:var(--text-color);
+transition:0.3s;
+}
+
+/* cards */
+
+.card,
+.car-card,
+.booking-panel,
+.stats-card{
+background:var(--card-bg);
+border:1px solid var(--border);
+}
+
+/* navbar */
+
+.header-navbar{
+background:var(--navbar-bg);
+}
+

@@ -1,0 +1,183 @@
+<% layout("/layout/boilerplate.ejs") %>
+
+<div class="container mt-5 mb-5">
+
+<div class="row g-5">
+
+<!-- LEFT SECTION -->
+<div class="col-lg-7">
+
+<!-- Car Image -->
+<div class="car-image-box mb-4">
+
+<img src="<%= car.image?.url || '/images/default-car.jpg' %>"
+class="img-fluid rounded-4 w-100 shadow-sm car-main-img"
+alt="<%= car.title %>">
+
+<div class="car-brand-badge">
+<%= car.brand %> • <%= car.model %>
+</div>
+
+</div>
+
+<!-- Title -->
+<h1 class="fw-bold mb-2"><%= car.title %></h1>
+
+<p class="text-muted fs-5 mb-4">
+<i class="fa-solid fa-location-dot"></i>  <%= car.location %>
+</p>
+
+<hr>
+
+<!-- Car Details -->
+<h4 class="fw-semibold mb-3">Vehicle Information</h4>
+
+<div class="row g-3 mb-4">
+
+<div class="col-md-4">
+<div class="info-card">
+<i class="fa-solid fa-car"></i>
+<span><%= car.vehicleType %></span>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="info-card">
+<i class="fa-solid fa-couch"></i>
+<span><%= car.seats %> Seats</span>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="info-card">
+<i class="fa-solid fa-gas-pump"></i> 
+<span><%= car.fuelType %></span>
+</div>
+</div>
+
+</div>
+
+<hr>
+
+<!-- Description -->
+<h4 class="fw-semibold mb-3">About this car</h4>
+
+<p class="text-secondary car-description">
+<%= car.description %>
+</p>
+
+<!-- Extra Features -->
+<div class="feature-list mt-4">
+
+<div class="feature-item">✔ Insurance Included</div>
+<div class="feature-item">✔ Instant Booking</div>
+<div class="feature-item">✔ Flexible Pickup</div>
+<div class="feature-item">✔ Sanitized Vehicle</div>
+
+</div>
+
+</div>
+
+
+<!-- BOOKING PANEL -->
+<div class="col-lg-5">
+
+<div class="booking-panel shadow-sm rounded-4">
+
+<div class="booking-body">
+
+<div class="price-box">
+
+<h2 class="price">
+₹ <%= car.pricePerDay %>
+</h2>
+
+<span class="price-day">per day</span>
+
+</div>
+
+<hr>
+
+<h5 class="fw-bold mb-3">Book this vehicle</h5>
+
+<form action="/booking" method="POST">
+
+<input type="hidden" name="carId" value="<%= car._id %>">
+
+<div class="mb-3">
+
+<label class="form-label">Start Date</label>
+
+<input id="startDate"
+type="date"
+name="startDate"
+class="form-control">
+
+</div>
+
+<div class="mb-3">
+
+<label class="form-label">End Date</label>
+
+<input id="endDate"
+type="date"
+name="endDate"
+class="form-control">
+
+</div>
+
+<div class="mb-4">
+
+<label class="form-label">Pickup Location</label>
+
+<input
+type="text"
+name="pickupLocation"
+class="form-control"
+placeholder="Enter pickup location">
+
+</div>
+
+<% if(!car.available){ %>
+
+<button class="btn btn-secondary w-100 btn-lg" disabled>
+Car Not Available
+</button>
+
+<% } else { %>
+
+<% if(currentUser){ %>
+
+<button class="btn btn-primary w-100 btn-lg booking-btn">
+Confirm Booking
+</button>
+
+<% } else { %>
+
+<a href="/login" class="btn btn-warning w-100 btn-lg">
+Login to Book
+</a>
+
+<p class="text-danger small text-center mt-2">
+Login required to book
+</p>
+
+<% } %>
+
+<% } %>
+
+</form>
+
+<p class="booking-note">
+You will not be charged yet.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>

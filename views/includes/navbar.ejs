@@ -1,0 +1,116 @@
+<nav class="navbar navbar-expand-lg header-navbar bg-dark">
+
+<div class="container">
+
+<!-- Logo -->
+<a class="navbar-brand logo-text" href="/home">
+<i class="fa-solid fa-gauge"></i> EasyDrive
+</a>
+
+<!-- Mobile Toggle -->
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="navbarNav">
+
+<!-- Left Navigation -->
+<ul class="navbar-nav me-auto nav-links">
+
+<li class="nav-item">
+<a class="nav-link" href="/home">Home</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="#about">About</a>
+</li>
+
+</ul>
+
+
+
+<!-- Right Section -->
+
+<div class="d-flex align-items-center gap-2">
+
+<div class="theme-toggle">
+
+<input type="checkbox" id="themeToggle">
+
+<label for="themeToggle" class="toggle-label">
+
+<span class="toggle-ball"></span>
+
+<i class="fa-solid fa-sun toggle-sun"></i>
+
+<i class="fa-solid fa-moon toggle-moon"></i>
+
+</label>
+
+</div>
+
+<% if(!currentUser){ %>
+
+<a href="/login" class="btn btn-outline-light btn-sm nav-btn">
+Login
+</a>
+
+<a href="/signup" class="btn btn-primary btn-sm nav-btn">
+Signup
+</a>
+
+<% } else { %>
+
+<div class="dropdown">
+
+<button class="btn btn-outline-light btn-sm dropdown-toggle nav-btn"
+data-bs-toggle="dropdown">
+
+👤 <%= currentUser.username %>
+
+</button>
+
+<ul class="dropdown-menu dropdown-menu-end">
+
+<li>
+<a class="dropdown-item" href="/profile">My Profile</a>
+</li>
+
+<li>
+<a class="dropdown-item" href="/bookings">My Bookings</a>
+</li>
+
+<% if(currentUser.role === "admin"){ %>
+
+<li><hr class="dropdown-divider"></li>
+
+<li>
+<a class="dropdown-item" href="/admin/dashboard">Admin Dashboard</a>
+</li>
+
+<li>
+<a class="dropdown-item" href="/admin/cars/new">Add New Car</a>
+</li>
+
+<% } %>
+
+<li><hr class="dropdown-divider"></li>
+
+<li>
+<a class="dropdown-item text-danger" href="/logout">Logout</a>
+</li>
+
+</ul>
+
+</div>
+
+<% } %>
+
+</div>
+
+</div>
+
+</div>
+
+
+</nav>
