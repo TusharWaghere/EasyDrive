@@ -76,9 +76,22 @@ The project is built using Node.js, Express, MongoDB, EJS, and Bootstrap, follow
 
 **Images**
 1. Home Page
+![Home page](./Images/Home%20page.jpeg)
+
 3. Add New Car
-4. Edit Car
-5. User Profile
-6. Signup
-7. Login
-8. My Bookings
+![Add new car](./Images/Add%20new%20car.jpeg)
+
+5. Edit Car
+![Edit car](./Images/Edit%20car.jpeg)
+
+7. User Profile
+![User profile](./Images/User%20profile.jpeg)
+
+9. Signup
+![Signup](./Images/Signup.jpeg)
+
+11. Login
+![Login](./Images/Login.jpeg)
+
+13. My Bookings
+![My bookings](./Images/My%20bookings.jpeg)
